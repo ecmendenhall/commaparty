@@ -4,7 +4,6 @@ require 'commaparty/destructure_element'
 describe CommaParty::DestructureElement do
 
   describe 'Normalizing elements' do
-
     it 'destructures an element with tag only' do
       tag, attributes, values = described_class.new([:lol]).call
       expect(tag).to eq(:lol_)
@@ -40,5 +39,4 @@ describe CommaParty::DestructureElement do
       expect(values).to eq([[:div], [:ul], [:other]])
     end
   end
-
 end

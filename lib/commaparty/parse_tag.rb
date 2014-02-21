@@ -1,0 +1,34 @@
+module CommaParty
+  class ParseTag
+
+    def initialize(tag)
+      @tag = tag
+    end
+
+    def call
+      [tag_name, attributes]
+    end
+
+    def attributes
+      attributes = {}
+      attributes = attributes.merge(class: classes.join(' ')) if classes
+      attributes = attributes.merge(id: id) if id
+      return attributes
+    end
+
+    def classes
+      class_names = @tag.to_s.match(/\.([^\.,#,\b]*)/)
+      class_names.captures if class_names
+    end
+
+    def id
+      ids = @tag.to_s.match(/\#([^\.,#,\b]*)/)
+      ids.captures.first if ids
+    end
+
+    def tag_name
+      @tag.to_s.match(/([^\.,#,\b]+)/).captures.first.to_sym
+    end
+
+  end
+end
