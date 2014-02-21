@@ -1,3 +1,5 @@
+require 'commaparty/parse_tag'
+
 module CommaParty
   class DestructureElement
 
@@ -12,9 +14,12 @@ module CommaParty
     private
 
     def normalize_element(element)
-      tag = safe_tagname(element.shift)
+      tag, tag_attributes = CommaParty::ParseTag.new(element.shift).call
+      tag = safe_tagname(tag)
       attributes = attribute(element) || {}
-      [tag, attributes, element]
+      [tag,
+       attributes.merge(tag_attributes),
+       element]
     end
 
     def safe_tagname(tag)

@@ -34,6 +34,12 @@ describe CommaParty::ParseTag do
       expect(tag).to eq(:exciting)
       expect(attributes).to eq({class: 'class', id: 'id'})
     end
+
+    it 'handles multiple classes' do
+      tag, attributes = described_class.new(:'exciting.one.two').call
+      expect(tag).to eq(:exciting)
+      expect(attributes).to eq({class: 'one two'})
+    end
   end
 
 end

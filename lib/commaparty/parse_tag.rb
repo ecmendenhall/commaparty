@@ -9,6 +9,8 @@ module CommaParty
       [tag_name, attributes]
     end
 
+    private
+
     def attributes
       attributes = {}
       attributes = attributes.merge(class: classes.join(' ')) if classes
@@ -17,8 +19,8 @@ module CommaParty
     end
 
     def classes
-      class_names = @tag.to_s.match(/\.([^\.,#,\b]*)/)
-      class_names.captures if class_names
+      class_names = @tag.to_s.scan(/\.([^\.,#,\b]*)/)
+      class_names if !class_names.empty?
     end
 
     def id

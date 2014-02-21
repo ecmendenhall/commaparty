@@ -35,5 +35,10 @@ describe CommaParty::Markup do
       expect(html).to eq("<parent/>")
     end
 
+    it 'handles tags with shortcut syntax' do
+      html = described_class.new([:'tag.one.two.three#id']).call
+      expect(html).to eq("<tag class=\"one two three\" id=\"id\"/>")
+    end
+
   end
 end
