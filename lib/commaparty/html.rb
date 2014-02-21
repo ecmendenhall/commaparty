@@ -3,6 +3,10 @@ require 'nokogiri'
 module CommaParty
   class HTML
 
+    def self.build(markup)
+      new(markup).call
+    end
+
     def initialize(markup)
       @markup = markup
     end

@@ -11,4 +11,9 @@ describe CommaParty::XML do
     expect(xml).to match(/<?xml/)
   end
 
+  it 'has a convenient class method' do
+    xml = described_class.build(markup)
+    expect(xml).to eq(described_class.new(markup).call)
+  end
+
 end

@@ -11,4 +11,9 @@ describe CommaParty::HTML do
     expect(html).to match(/<!DOCTYPE html/)
   end
 
+  it 'has a class method' do
+    html = described_class.build(markup)
+    expect(html).to eq(described_class.new(markup).call)
+  end
+
 end
