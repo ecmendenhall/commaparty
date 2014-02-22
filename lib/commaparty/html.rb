@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'commaparty/markup'
 
 module CommaParty
   class HTML
@@ -8,11 +9,11 @@ module CommaParty
     end
 
     def initialize(markup)
-      @markup = markup
+      @markup = CommaParty::Markup.new(markup)
     end
 
     def call
-      build(@markup)
+      build(@markup.call)
     end
 
     private
@@ -23,5 +24,4 @@ module CommaParty
       end.to_html
     end
   end
-
 end

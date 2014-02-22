@@ -7,12 +7,12 @@ describe CommaParty::Markup do
 
     it 'generates a single tag' do
       html = described_class.new([:tag]).call
-      expect(html).to eq("<tag/>")
+      expect(html).to eq("<tag></tag>")
     end
 
     it 'generates a single tag with an attribute' do
       html = described_class.new([:tag, {attribute: 'something'}]).call
-      expect(html).to eq("<tag attribute=\"something\"/>")
+      expect(html).to eq("<tag attribute=\"something\"></tag>")
     end
 
     it 'generates a single tag with a value' do
@@ -22,22 +22,22 @@ describe CommaParty::Markup do
 
     it 'generates two sibling tags' do
       html = described_class.new([:tag1], [:tag2]).call
-      expect(html).to eq("<tag1/><tag2/>")
+      expect(html).to eq("<tag1></tag1><tag2></tag2>")
     end
 
     it 'generates nested tags' do
       html = described_class.new([:theparent, [:tag1], [:tag2]]).call
-      expect(html).to eq("<theparent>\n  <tag1/>\n  <tag2/>\n</theparent>")
+      expect(html).to eq("<theparent><tag1></tag1><tag2></tag2></theparent>")
     end
 
     it 'handles tags with the same names as ruby methods' do
       html = described_class.new([:parent]).call
-      expect(html).to eq("<parent/>")
+      expect(html).to eq("<parent></parent>")
     end
 
     it 'handles tags with shortcut syntax' do
       html = described_class.new([:'tag.one.two.three#id']).call
-      expect(html).to eq("<tag class=\"one two three\" id=\"id\"/>")
+      expect(html).to eq("<tag class=\"one two three\" id=\"id\"></tag>")
     end
 
   end

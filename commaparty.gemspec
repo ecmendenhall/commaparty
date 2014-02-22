@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = CommaParty::VERSION
   spec.authors       = ["Connor Mendenhall"]
   spec.email         = ["ecmendenhall@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{A ruby implementation of Clojure's Hiccup markup generation library.}
+  spec.summary       = %q{Hiccup, with commas.}
+  spec.homepage      = "https://github.com/ecmendenhall/commaparty"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

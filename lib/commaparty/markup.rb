@@ -21,7 +21,7 @@ module CommaParty
             create_child(root, element)
           end
         end
-      end.doc.root.children.to_s
+      end.doc.root.children.to_html
     end
 
     def create_child(node, element)

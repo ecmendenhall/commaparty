@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'commaparty/markup'
 
 module CommaParty
   class XML
@@ -8,7 +9,7 @@ module CommaParty
     end
 
     def initialize(markup)
-      @markup = markup
+      @markup = CommaParty::Markup.new(markup).call
     end
 
     def call

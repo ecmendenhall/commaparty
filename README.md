@@ -1,29 +1,56 @@
-# Commaparty
+CommaParty
+======
+CommaParty is a Ruby implementation of Clojure's
+[Hiccup](https://github.com/weavejester/hiccup/) HTML generation library.
+It uses arrays to represent elements, and hashes to represent an element's
+attributes. Unlike in Clojure, you have to use a lot of commas everywhere all
+the time.
 
-TODO: Write a gem description
+Install
+-------
+Add the following dependency to your `Gemfile`:
 
-## Installation
+```ruby
+gem 'commaparty'
+```
 
-Add this line to your application's Gemfile:
+then
 
-    gem 'commaparty'
+```ruby
+require 'commaparty'
+```
 
-And then execute:
+Syntax
+------
 
-    $ bundle
+Here is a basic example of commaparty syntax:
 
-Or install it yourself as:
+```ruby
+[1] pry(main)> require 'commaparty'
+=> true
+[2] pry(main)> CommaParty.markup([:span, {class: "foo"}, "bar"])
+=> "<span class=\"foo\">bar</span>"
+```
 
-    $ gem install commaparty
+The first element of the array is used as the element name. The second
+attribute can optionally be a hash, in which case it is used to supply
+the element's attributes. Every other element is considered part of the
+tag's body.
 
-## Usage
+It provides a CSS-like shortcut for denoting `id` and `class`
+attributes:
 
-TODO: Write usage instructions here
+```ruby
+[1] pry(main)> CommaParty.markup([:'div#foo.bar.baz', "bang"])
+=> "<div class=\"bar baz\" id=\"foo\">bang</div>"
+```
 
-## Contributing
+If the body of the element returns an array, its contents will be expanded out
+into the element body. This makes working with methods like `map` more
+convenient:
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+```ruby
+[1] pry(main)> CommaParty.markup(
+  [:ul, ["one", "two", "three"].map {|n| [:li, n]}])
+=> "<ul>\n<li>two</li>\n<li>three</li>[:li&gt;</ul>"
+```
