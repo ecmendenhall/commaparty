@@ -40,5 +40,10 @@ describe CommaParty::Markup do
       expect(html).to eq("<tag class=\"one two three\" id=\"id\"></tag>")
     end
 
+    it 'handles seqs in the tag body' do
+      html = described_class.new([:ul, *["one", "two", "three"].map {|n| [:li, n]}]).call
+      expect(html).to eq("<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>")
+    end
+
   end
 end
