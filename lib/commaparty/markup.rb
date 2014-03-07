@@ -4,17 +4,17 @@ require 'commaparty/destructure_element'
 module CommaParty
   class Markup
 
-    def initialize(*hiccup)
-      @hiccup = hiccup
+    def initialize(hiccup)
+      @hiccup = [hiccup]
     end
 
     def call
-      build(*@hiccup)
+      build(@hiccup)
     end
 
     private
 
-    def build(*elements)
+    def build(elements)
       doc = Nokogiri::XML::Builder.new do |doc|
         doc.root do |root|
           elements.each do |element|
@@ -26,10 +26,16 @@ module CommaParty
 
     def create_child(node, element)
       tag, attributes, children = CommaParty::DestructureElement.new(element).call
-      if children.empty? || children.first.is_a?(String)
-        node.send(tag, attributes) {|n| n << children.first }
-      else
-        node.send(tag, attributes) {|n| n << build(*children) }
+      node.send(tag, attributes) {|n| make_nodes(n, children) }
+    end
+
+    def make_nodes(parent, children)
+      children.each do |child|
+        if child.is_a?(String) || child.is_a?(Fixnum)
+          parent << child.to_s
+        else
+          create_child(parent, child)
+        end
       end
     end
 

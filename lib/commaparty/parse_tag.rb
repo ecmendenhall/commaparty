@@ -2,11 +2,11 @@ module CommaParty
   class ParseTag
 
     def initialize(tag)
-      @tag = tag
+      @tag = tag[0]
     end
 
     def call
-      [tag_name, attributes]
+      [safe_tag_name, attributes]
     end
 
     private
@@ -30,6 +30,10 @@ module CommaParty
 
     def tag_name
       @tag.to_s.match(/([^\.,#,\b]+)/).captures.first.to_sym
+    end
+
+    def safe_tag_name
+      "#{tag_name.to_s}_".to_sym
     end
 
   end

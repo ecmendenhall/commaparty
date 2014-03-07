@@ -21,8 +21,8 @@ describe CommaParty::Markup do
     end
 
     it 'generates two sibling tags' do
-      html = described_class.new([:tag1], [:tag2]).call
-      expect(html).to eq("<tag1></tag1><tag2></tag2>")
+      html = described_class.new([:div, [:tag1], [:tag2]]).call
+      expect(html).to eq("<div>\n<tag1></tag1><tag2></tag2>\n</div>")
     end
 
     it 'generates nested tags' do
@@ -41,7 +41,7 @@ describe CommaParty::Markup do
     end
 
     it 'handles seqs in the tag body' do
-      html = described_class.new([:ul, *["one", "two", "three"].map {|n| [:li, n]}]).call
+      html = described_class.new([:ul, ["one", "two", "three"].map {|n| [:li, n]}]).call
       expect(html).to eq("<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>")
     end
 
