@@ -44,3 +44,13 @@ attributes:
 [1] pry(main)> CommaParty.markup([:'div#foo.bar.baz', "bang"])
 => "<div class=\"bar baz\" id=\"foo\">bang</div>"
 ```
+
+If the body of the element is an array, its contents will be expanded out
+into the element body. This makes working with methods like `map` more
+convenient:
+
+
+```ruby
+[2] pry(main)> CommaParty.markup([:ul, (1..4).map {|n| [:li, n]}])
+=> "<ul>\n<li>1</li>\n<li>2</li>\n<li>3</li>\n<li>4</li>\n</ul>"
+```
