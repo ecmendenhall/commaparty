@@ -45,5 +45,10 @@ describe CommaParty::Markup do
       expect(html).to eq("<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>")
     end
 
+    it 'handles nils in the tag body' do
+      html = described_class.new([:div, nil]).call
+      expect(html).to eq("<div></div>")
+    end
+
   end
 end

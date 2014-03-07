@@ -31,7 +31,7 @@ module CommaParty
 
     def make_nodes(parent, children)
       children.each do |child|
-        if child.is_a?(String) || child.is_a?(Fixnum)
+        if child.is_a?(String) || child.is_a?(Fixnum) || child.nil?
           parent << child.to_s
         else
           create_child(parent, child)
