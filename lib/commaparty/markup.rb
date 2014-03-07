@@ -9,19 +9,25 @@ module CommaParty
     end
 
     def call
+      build(@hiccup).doc.to_html
+    end
+
+    def builder
       build(@hiccup)
+    end
+
+    def hiccup
+      @hiccup.flatten(1)
     end
 
     private
 
     def build(elements)
-      doc = Nokogiri::XML::Builder.new do |doc|
-        doc.root do |root|
-          elements.each do |element|
-            create_child(root, element)
-          end
+      Nokogiri::XML::Builder.new do |doc|
+        elements.each do |element|
+          create_child(doc, element)
         end
-      end.doc.root.children.to_html
+      end
     end
 
     def create_child(node, element)

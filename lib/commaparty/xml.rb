@@ -9,20 +9,13 @@ module CommaParty
     end
 
     def initialize(markup)
-      @markup = CommaParty::Markup.new(markup).call
+      @markup = CommaParty::Markup.new(markup)
     end
 
     def call
-      build(@markup)
+      @markup.builder.to_xml
     end
 
-    private
-
-    def build(markup)
-      Nokogiri::XML::Builder.new do |doc|
-        doc << markup
-      end.to_xml
-    end
   end
 
 end

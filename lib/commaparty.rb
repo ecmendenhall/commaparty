@@ -17,5 +17,9 @@ module CommaParty
     CommaParty::Markup.new(hiccup).call
   end
 
+  def self.builder(hiccup)
+    CommaParty::Markup.new(hiccup).builder
+  end
+
 end
 
