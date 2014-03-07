@@ -1,5 +1,7 @@
 CommaParty
 ======
+[![Build Status](https://travis-ci.org/ecmendenhall/commaparty.png?branch=master)](https://travis-ci.org/ecmendenhall/commaparty)
+
 CommaParty is a Ruby implementation of Clojure's
 [Hiccup](https://github.com/weavejester/hiccup/) HTML generation library.
 It uses arrays to represent elements, and hashes to represent an element's
