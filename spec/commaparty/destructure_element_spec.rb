@@ -46,7 +46,7 @@ describe CommaParty::DestructureElement do
       expect(body).to eq([[:li, "one"], [:li, "two"], [:li, "three"]])
     end
 
-    it 'wat' do
+    it 'destructures an element with a tag in the body' do
       tag, attributes, body = described_class.new([:p, [:em, "hello"]]).call
       expect(tag).to eq(:p_)
       expect(attributes).to eq({})

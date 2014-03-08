@@ -3,7 +3,7 @@ require 'commaparty/parse_body'
 
 describe CommaParty::ParseBody do
 
-  it 'returns nil for tags with no body' do
+  it 'returns [] for tags with no body' do
     body = described_class.new([:tag]).call
     expect(body).to eq([])
   end
