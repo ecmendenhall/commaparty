@@ -26,8 +26,9 @@ describe CommaParty::Markup do
     end
 
     it 'generates nested tags' do
-      html = described_class.new([:theparent, [:tag1], [:tag2]]).call
-      expect(html).to eq("<theparent><tag1></tag1><tag2></tag2></theparent>\n")
+      nested = [:parent, [:tag1, [:tag2, [:tag3, [:tag4, 'deep', [:tag5, 'nesting']]]]]]
+      html = described_class.new(nested).call
+      expect(html).to eq("<parent><tag1><tag2><tag3><tag4>deep<tag5>nesting</tag5></tag4></tag3></tag2></tag1></parent>\n")
     end
 
     it 'handles tags with the same names as ruby methods' do
