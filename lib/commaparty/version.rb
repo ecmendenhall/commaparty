@@ -1,3 +1,3 @@
 module CommaParty
-  VERSION = "0.0.4pre"
+  VERSION = "0.0.1"
 end
