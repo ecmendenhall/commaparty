@@ -31,18 +31,25 @@ module CommaParty
     end
 
     def create_child(node, element)
+      return if element == []
       tag, attributes, children = CommaParty::DestructureElement.new(element).call
       node.send(tag, attributes) {|n| make_nodes(n, children) }
     end
 
     def make_nodes(parent, children)
       children.each do |child|
-        if child.is_a?(String) || child.is_a?(Fixnum) || child.nil?
+        if terminal?(child)
           parent << child.to_s
         else
           create_child(parent, child)
         end
       end
+    end
+
+    def terminal?(child)
+      child.is_a?(String) ||
+      child.is_a?(Fixnum) ||
+      child.nil?
     end
 
   end

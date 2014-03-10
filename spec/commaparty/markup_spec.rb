@@ -49,6 +49,11 @@ describe CommaParty::Markup do
       html = described_class.new([:div, nil]).call
       expect(html).to eq("<div></div>\n")
     end
+
+    it 'handles empty arrays in the tag body' do
+      html = described_class.new([:div, [], 'he', [[]], 'llo']).call
+      expect(html).to eq("<div>hello</div>\n")
+    end
   end
 
   describe 'Generating builders' do
